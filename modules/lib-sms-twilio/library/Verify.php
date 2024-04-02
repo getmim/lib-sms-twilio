@@ -16,7 +16,11 @@ class Verify
 
     protected static function getConfig()
     {
-        return \Mim::$app->config->libSmsTwilio->Verify;
+        $config = \Mim::$app->config->libSmsTwilio->Verify;
+        if ($config->Host) {
+            self::$host = $config->Host;
+        }
+        return $config;
     }
 
     static function lastError()

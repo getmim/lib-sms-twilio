@@ -17,6 +17,7 @@ konfigurasi aplikasi:
 return [
     'libSmsTwilio' => [
         'Verify' => [
+            'Host' => 'https://verify.twilio.com/v2',
             'AccountSID' => '...',
             'AuthToken' => '...',
             'ServiceID' => '...'
