@@ -2,7 +2,7 @@
 
 return [
     '__name' => 'lib-sms-twilio',
-    '__version' => '0.1.0',
+    '__version' => '0.2.0',
     '__git' => 'git@github.com:getmim/lib-sms-twilio.git',
     '__license' => 'MIT',
     '__author' => [

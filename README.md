@@ -57,3 +57,6 @@ $result = Verify::request($phone);
 # Verify OTP
 $result = Verify::verify($phone, $otp);
 ```
+
+Tambahkan file `BASEPATH/twilio-verify.txt` untuk mock API twilio. OTP yang
+tergernerate bisa dilihat dari `HOST/twilio-verify.txt`.

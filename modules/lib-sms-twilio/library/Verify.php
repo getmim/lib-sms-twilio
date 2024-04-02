@@ -14,6 +14,11 @@ class Verify
     protected static $host = 'https://verify.twilio.com/v2';
     protected static $error;
 
+    protected static function getMockFile()
+    {
+        return BASEPATH . '/twilio-verify.txt';
+    }
+
     protected static function getConfig()
     {
         $config = \Mim::$app->config->libSmsTwilio->Verify;
@@ -29,6 +34,13 @@ class Verify
     }
 
     static function request(string $phone) {
+        $mock_file = self::getMockFile();
+        if (is_file($mock_file)) {
+            $otp = rand(100000, 999999);
+            file_put_contents($mock_file, $phone . ':' . $otp);
+            return true;
+        }
+
         $config = self::getConfig();
         $serv_id = $config->ServiceID;
         $url = self::$host . '/Services/' . $serv_id . '/Verifications';
@@ -68,6 +80,14 @@ class Verify
 
     static function verify(string $phone, string $code)
     {
+        $mock_file = self::getMockFile();
+        if (is_file($mock_file)) {
+            $ctn = file_get_contents($mock_file);
+            $ctns = explode(':', $ctn);
+
+            return $ctns[0] == $phone && $code == $ctns[1];
+        }
+
         $config = self::getConfig();
         $serv_id = $config->ServiceID;
         $url = self::$host . '/Services/' . $serv_id . '/VerificationCheck';
